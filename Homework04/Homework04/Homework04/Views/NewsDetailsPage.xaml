@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Homework04.Views.NewsDetailsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <ListView ItemsSource="{Binding Contacts}"
+                      SelectedItem="{Binding selectedContact, Mode=TwoWay}"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding CommandRefresh}"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      x:Name="contactList"
+                      VerticalOptions="Center" >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding Image}" HeightRequest="100" WidthRequest="100" />
+                                    <Label Text="{Binding FirstName}" TextColor="Black" FontSize="Medium"  FontAttributes="Bold"/>
+                                    <Label Text="| ~Number: "  TextColor="Gray" FontSize="Medium"  FontAttributes="Bold" />
+                                    <Label Text="{Binding Phone}" TextColor="Gray" FontSize="Medium" />
+
+                                    <!--<StackLayout Orientation="Vertical" Padding="0">
+                                            <Label Text="{Binding FirstName}" TextColor="Black" FontSize="Medium"  FontAttributes="Bold"/>
+                                            <Label Text="{Binding Phone}" TextColor="Gray" FontSize="Small"/>
+                                        </StackLayout>-->
+
+                                </StackLayout>
+
+                            </ViewCell>
+                            <!--<ImageCell Text="{Binding FirstName}"
+                                           TextColor="Black"
+                                           Detail="{Binding Phone}"
+                                           DetailColor="Gray"
+                                           ImageSource="{Binding Image}" >
+
+                                    <ImageCell.ContextActions>
+                                        <MenuItem Text="More" 
+                                                  Command="{Binding Path=BindingContext.CommandMore, Source={x:Reference Name=contactList}}"
+                                                  CommandParameter="{Binding .}" />
+                                        <MenuItem Text="Delete" 
+                                                  IsDestructive="True"
+                                                  Command="{Binding Path=BindingContext.CommandDelete, Source={x:Reference Name=contactList}}"
+                                                  CommandParameter="{Binding .}"/>
+                                    </ImageCell.ContextActions>
+                                </ImageCell>-->
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+       
+    </ContentPage.Content>
+</ContentPage>
