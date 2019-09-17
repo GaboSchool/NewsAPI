@@ -9,6 +9,7 @@
         <StackLayout Spacing="2" Padding="20" VerticalOptions="Center">
             <Frame CornerRadius="15">
                 <StackLayout HorizontalOptions="CenterAndExpand" >
+                    
                     <Label Text="News Information"
                            FontSize="Large"
                            FontFamily="OpenSans"
@@ -16,15 +17,31 @@
                            HorizontalOptions="Center" 
                            TextColor="Black"/>
 
-                    <Entry Placeholder="Enter a Country Name"
+                    <Entry Placeholder="Enter a Country Code"
                            Text="{Binding InputCountry}" />
-                    <Button Text="Search" 
+
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand">
+
+                        <Button Text="?" 
+                        BorderRadius="20"
+                        BackgroundColor="DarkGreen"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans"
+                        Command="{Binding CommandGetInfo}" />
+
+                        <Button Text="Search" 
                         BorderRadius="20"
                         BackgroundColor="DarkGray"
                         TextColor="White"
                         FontAttributes="Bold"
                         FontFamily="OpenSans"
                         Command="{Binding CommandGetNews}" />
+                        
+                        
+                    </StackLayout>
+                  
 
                 </StackLayout>
             </Frame>

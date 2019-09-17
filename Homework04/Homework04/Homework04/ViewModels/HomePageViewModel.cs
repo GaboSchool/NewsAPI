@@ -19,14 +19,23 @@ namespace Homework04.ViewModels
         public INewsApi ServiceApi { get; set; }
 
         public ICommand CommandGetNews { get; set; }
-
+        public ICommand CommandGetInfo { get; set; }
         public HomePageViewModel()
         {
             ServiceApi = new ApiService();
             CommandGetNews = new Command(async () =>
             {
                 await GetArticles(InputCountry);
-                await App.Current.MainPage.Navigation.PushAsync(new NewsDetailsPage(CountryNews));
+                await App.Current.MainPage.Navigation.PushAsync(new NewsDetailsPage(CountryNews.Articles));
+            });
+
+            CommandGetInfo = new Command(async () =>
+            {
+                string msj = $"\n" +
+                $"US, BR, CA, CU, \n" +
+                $"FR, IT, JP, PT, RU \n";
+
+                await App.Current.MainPage.DisplayAlert("Introduce Country Code Like: ", msj, "Ok");
             });
         }
         async Task GetArticles(string country)

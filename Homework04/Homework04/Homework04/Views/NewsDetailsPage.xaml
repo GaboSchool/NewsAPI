@@ -1,51 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Homework04.Views.NewsDetailsPage">
+             x:Class="Homework04.Views.NewsDetailsPage"
+             BackgroundColor="AntiqueWhite">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <ListView ItemsSource="{Binding Contacts}"
-                      SelectedItem="{Binding selectedContact, Mode=TwoWay}"
-                      IsPullToRefreshEnabled="True"
-                      RefreshCommand="{Binding CommandRefresh}"
-                      IsRefreshing="{Binding IsRefreshing}"
-                      x:Name="contactList"
-                      VerticalOptions="Center" >
+                <ListView ItemsSource="{Binding CountryArticles}"
+                          SelectedItem="{Binding _selectedArticle, Mode=TwoWay}"
+                          x:Name="newsList"
+                          VerticalOptions="Center"
+                          HasUnevenRows="True">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding Image}" HeightRequest="100" WidthRequest="100" />
-                                    <Label Text="{Binding FirstName}" TextColor="Black" FontSize="Medium"  FontAttributes="Bold"/>
-                                    <Label Text="| ~Number: "  TextColor="Gray" FontSize="Medium"  FontAttributes="Bold" />
-                                    <Label Text="{Binding Phone}" TextColor="Gray" FontSize="Medium" />
+                                <StackLayout Orientation="Vertical">
 
-                                    <!--<StackLayout Orientation="Vertical" Padding="0">
-                                            <Label Text="{Binding FirstName}" TextColor="Black" FontSize="Medium"  FontAttributes="Bold"/>
-                                            <Label Text="{Binding Phone}" TextColor="Gray" FontSize="Small"/>
-                                        </StackLayout>-->
+                                    <!--
+                                    Se ve Muy Sobrecargado!
+                                    <Image Source="{Binding UrlToImage}" HeightRequest="50" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                                    -->
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Title}" TextColor="Black" FontSize="Medium"  FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Author: " TextColor="Black" FontSize="Small"  FontAttributes="Bold" TextDecorations="Underline"/>
+                                        <Label Text="{Binding Author}" TextColor="Black" FontSize="Small"  FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Published At: " TextColor="Black" FontSize="Small"  FontAttributes="Bold" TextDecorations="Underline"/>
+                                        <Label Text="{Binding PublishedAt}" TextColor="Black" FontSize="Small"  FontAttributes="Bold"/>
+                                    </StackLayout>
 
                                 </StackLayout>
 
                             </ViewCell>
-                            <!--<ImageCell Text="{Binding FirstName}"
-                                           TextColor="Black"
-                                           Detail="{Binding Phone}"
-                                           DetailColor="Gray"
-                                           ImageSource="{Binding Image}" >
-
-                                    <ImageCell.ContextActions>
-                                        <MenuItem Text="More" 
-                                                  Command="{Binding Path=BindingContext.CommandMore, Source={x:Reference Name=contactList}}"
-                                                  CommandParameter="{Binding .}" />
-                                        <MenuItem Text="Delete" 
-                                                  IsDestructive="True"
-                                                  Command="{Binding Path=BindingContext.CommandDelete, Source={x:Reference Name=contactList}}"
-                                                  CommandParameter="{Binding .}"/>
-                                    </ImageCell.ContextActions>
-                                </ImageCell>-->
                         </DataTemplate>
                     </ListView.ItemTemplate>
 

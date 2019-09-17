@@ -12,7 +12,10 @@ namespace Homework04
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new HomePage());
+            MainPage = new NavigationPage(new HomePage())
+            {
+                BarBackgroundColor = Color.DarkOrange
+            };
         }
 
         protected override void OnStart()

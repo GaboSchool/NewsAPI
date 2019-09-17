@@ -14,7 +14,7 @@ namespace Homework04.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewsDetailsPage : ContentPage
     {
-        public NewsDetailsPage(CountryNews articles)
+        public NewsDetailsPage(IList<Article> articles)
         {
             InitializeComponent();
             BindingContext = new NewsDetailsPageViewModel(articles);

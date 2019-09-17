@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -15,19 +16,53 @@ namespace Homework04.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public CountryNews CountryNews{ get; set; }    
+        public IList<Article> CountryArticles { get; set;}  
 
+        private Article _selectedArticle;
 
-        public NewsDetailsPageViewModel(CountryNews articles)
+        public Article selectedArticle
         {
-            this.CountryNews = articles;
+            get
+            {
+                return _selectedArticle;
+            }
+            set
+            {
+                _selectedArticle = value;
+                if (_selectedArticle != null)
+                {
+                    ArticleDetails(_selectedArticle);
+                }
+            }
+        }
+
+        public NewsDetailsPageViewModel(IList<Article> articles)
+        {
+            CountryArticles = new List<Article>();
+            int count = 0;
+            foreach (var item in articles)
+            {
+                CountryArticles.Add(item);
+                count++;
+                
+                if (count == 6)
+                    break;
+            }
+            //CountryArticles = articles;
             //GetArticles(country);        
 
 
         }
 
-     
-       
+        private async void ArticleDetails(Article article)
+        {
+            string details = $"!!!";
+            await App.Current.MainPage.DisplayAlert("Article Details", details, "Ok");
+        }
+
+
+
+
 
     }
 }
