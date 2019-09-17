@@ -7,13 +7,14 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Homework04.ViewModels
 {
     public class HomePageViewModel : INotifyPropertyChanged
     {
-
+        private bool notInternet { get; set; }
         public string InputCountry { get; set; }
         public CountryNews CountryNews { get; set; }
         public INewsApi ServiceApi { get; set; }
@@ -22,11 +23,15 @@ namespace Homework04.ViewModels
         public ICommand CommandGetInfo { get; set; }
         public HomePageViewModel()
         {
+            notInternet = true;
             ServiceApi = new ApiService();
             CommandGetNews = new Command(async () =>
             {
                 await GetArticles(InputCountry);
-                await App.Current.MainPage.Navigation.PushAsync(new NewsDetailsPage(CountryNews.Articles));
+                if(notInternet == false)
+                    await App.Current.MainPage.Navigation.PushAsync(new NewsDetailsPage(CountryNews.Articles));
+
+
             });
 
             CommandGetInfo = new Command(async () =>
@@ -40,18 +45,19 @@ namespace Homework04.ViewModels
         }
         async Task GetArticles(string country)
         {
-            //var current = Connectivity.NetworkAccess;
-            //if (current == NetworkAccess.Internet)
-            //{
-            CountryNews = await ServiceApi.GetNews(country);
+            var current = Connectivity.NetworkAccess;
+            if (current == NetworkAccess.Internet)
+            {
+                CountryNews = await ServiceApi.GetNews(country);
+                notInternet = false;
+                //ImageLink = $"http://openweathermap.org/img/wn/{CityWeather.Weather[0].Icon}@2x.png";
 
-            //ImageLink = $"http://openweathermap.org/img/wn/{CityWeather.Weather[0].Icon}@2x.png";
-
-            //}
-            //else
-            //{
-            //    await App.Current.MainPage.DisplayAlert("Error", "Don't have internet connection, try again...", "Ok");
-            //}
+            }
+            else
+            {
+                notInternet = true;
+                await App.Current.MainPage.DisplayAlert("Error", "Don't have internet connection, Try again...", "Ok");
+            }
         }
 
 

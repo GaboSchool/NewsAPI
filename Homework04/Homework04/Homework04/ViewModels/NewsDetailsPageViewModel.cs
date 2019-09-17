@@ -40,12 +40,18 @@ namespace Homework04.ViewModels
         {
             CountryArticles = new List<Article>();
             int count = 0;
+            articles.OrderBy(x => x.PublishedAt);
             foreach (var item in articles)
             {
+                if (count < 4)
+                {
+                    count++;
+                    continue;
+                }                    
                 CountryArticles.Add(item);
                 count++;
                 
-                if (count == 6)
+                if (count == 10)
                     break;
             }
             //CountryArticles = articles;
