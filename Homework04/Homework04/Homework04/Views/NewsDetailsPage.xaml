@@ -7,7 +7,7 @@
         <ScrollView>
             <StackLayout>
                 <ListView ItemsSource="{Binding CountryArticles}"
-                          SelectedItem="{Binding _selectedArticle, Mode=TwoWay}"
+                          SelectedItem="{Binding SelectedArticle, Mode=TwoWay}"
                           x:Name="newsList"
                           VerticalOptions="Center"
                           HasUnevenRows="True">

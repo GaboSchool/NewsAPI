@@ -15,12 +15,9 @@ namespace Homework04.ViewModels
     public class NewsDetailsPageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public IList<Article> CountryArticles { get; set;}  
-
+        public IList<Article> CountryArticles { get; set;} 
         private Article _selectedArticle;
-
-        public Article selectedArticle
+        public Article SelectedArticle
         {
             get
             {
@@ -62,8 +59,7 @@ namespace Homework04.ViewModels
 
         private async void ArticleDetails(Article article)
         {
-            string details = $"!!!";
-            await App.Current.MainPage.DisplayAlert("Article Details", details, "Ok");
+            await App.Current.MainPage.DisplayAlert(article.Title, article.Description, "Ok");
         }
 
 
